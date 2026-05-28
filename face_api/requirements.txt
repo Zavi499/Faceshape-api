@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+mediapipe
+opencv-python
+numpy
+pillow
+python-multipart
+apscheduler
