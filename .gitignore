@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+face_api/outputs/
+face_api/.env
+face_api/.env.*
+face_api/models/
