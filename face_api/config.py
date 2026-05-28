@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 from datetime import datetime
 from pathlib import Path
 from uuid import uuid4
@@ -13,6 +14,14 @@ IMAGE_TTL_MINUTES = 30
 MAX_FILE_SIZE_MB = 10
 MIN_RESOLUTION = (200, 200)
 ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"]
+ALLOWED_ORIGINS = [
+    origin.strip().rstrip("/")
+    for origin in os.getenv(
+        "ALLOWED_ORIGINS",
+        "https://facesanalyzer.com,https://www.facesanalyzer.com",
+    ).split(",")
+    if origin.strip()
+]
 GOLDEN_RATIO = 1.618
 FACE_LANDMARKER_MODEL_URL = (
     "https://storage.googleapis.com/mediapipe-models/face_landmarker/"

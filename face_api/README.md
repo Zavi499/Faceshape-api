@@ -49,6 +49,16 @@ Port Exposes: 8000
 
 Coolify often defaults the exposed app port to `3000`, so change it to `8000`.
 
+### 2.1 Add Environment Variables
+
+To allow browser requests only from the frontend domain, add this environment variable in Coolify:
+
+```text
+ALLOWED_ORIGINS=https://facesanalyzer.com,https://www.facesanalyzer.com
+```
+
+The API enforces this for `/analyze`, specialized analysis endpoints, and `/image/{filename}`. Requests from other browser origins receive HTTP `403`.
+
 ### 3. Add Domain
 
 In the app settings, set your domain:
@@ -167,3 +177,7 @@ Stored images are written to `./outputs` inside the `face_api` directory. They e
 ## Age Model Note
 
 The age endpoint uses a dedicated OpenCV DNN model rather than ratio-based heuristics. The required model files are downloaded automatically into `./models` the first time the age estimator is initialized.
+
+## Security Note
+
+The API uses an origin guard and CORS headers so browser requests are accepted only from `facesanalyzer.com` by default. This protects normal website usage, but `Origin` headers can be spoofed by non-browser clients. For private or paid production access, add API-key authentication or user authentication in addition to the origin restriction.

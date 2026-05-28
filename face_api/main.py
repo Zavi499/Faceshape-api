@@ -42,6 +42,7 @@ from schemas import (
     SymmetryAnalysisResponse,
 )
 from scorer import calculate_scores
+from security import OriginGuardMiddleware
 from symmetry import compute_symmetry
 from validator import FileValidationError, ValidatedImage, analyze_image_quality, validate_upload_file
 
@@ -93,6 +94,7 @@ app = FastAPI(
     description="Single-face analysis API powered by FastAPI, MediaPipe, and dedicated endpoint-specific facial analysis flows.",
     lifespan=lifespan,
 )
+app.add_middleware(OriginGuardMiddleware)
 
 
 def save_original_image(image: Image.Image, filename: str) -> None:
