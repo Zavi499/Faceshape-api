@@ -1,7 +1,0 @@
-fastapi==0.112.2
-keras==3.2.1
-tensorflow
-opencv_python==4.9.0.80
-uvicorn==0.30.6
-python-multipart
-pillow
