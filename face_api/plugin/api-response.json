@@ -1,0 +1,164 @@
+{
+    "success": true,
+    "message": "Face analysis completed successfully.",
+    "image_quality": {
+        "lighting": "good",
+        "face_angle": "frontal",
+        "blur_score": 100.0,
+        "quality_score": 100.0,
+        "recommendation": null
+    },
+    "measurements": {
+        "face_width": 121.49,
+        "face_height": 151.91,
+        "eye_span": 76.25,
+        "interocular_distance": 54.5,
+        "forehead_width": 62.7,
+        "jaw_width": 121.49,
+        "mouth_width": 42.08,
+        "nose_length": 34.63,
+        "nose_width": 35.07
+    },
+    "features": {
+        "eyes": {
+            "size": "Medium",
+            "shape": "Wide",
+            "spacing": "Wide",
+            "symmetry": "Excellent",
+            "mean_width": 24.52,
+            "aspect_ratio": 3.11,
+            "spacing_ratio": 0.45,
+            "symmetry_difference_pct": 0.2,
+            "ratings": {
+                "shape": 6.7,
+                "size": 8.7,
+                "spacing": 9.7,
+                "symmetry": 10.0,
+                "overall": 8.8
+            }
+        },
+        "eyebrows": {
+            "thickness": "Thin",
+            "arch": "Soft Arch",
+            "spacing": "Wide",
+            "symmetry": "Excellent",
+            "average_height": 5.37,
+            "spacing_ratio": 0.22,
+            "arch_delta": 4.96,
+            "symmetry_difference_pct": 1.8,
+            "ratings": {
+                "arch": 8.8,
+                "spacing": 7.5,
+                "thickness": 6.7,
+                "overall": 7.7
+            }
+        },
+        "nose": {
+            "width": "Medium",
+            "length": "Short",
+            "bridge": "Very high",
+            "shape": "Straight",
+            "proportion": "Distinctive",
+            "width_ratio": 0.29,
+            "length_ratio": 0.23,
+            "bridge_ratio": 1.02,
+            "ratings": {
+                "width": 9.6,
+                "length": 5.5,
+                "bridge": 3.3,
+                "proportion": 7.5,
+                "overall": 6.5
+            }
+        },
+        "lips": {
+            "width": "Narrow",
+            "thickness": "Thin",
+            "shape": "Bottom-heavy",
+            "cupid_bow": "Subtle",
+            "symmetry": "Excellent",
+            "proportion": "Distinctive",
+            "width_ratio": 0.35,
+            "total_thickness": 1.28,
+            "upper_lower_ratio": 0.21,
+            "cupid_bow_offset": 0.22,
+            "symmetry_difference": 0.05,
+            "ratings": {
+                "shape": 5.3,
+                "thickness": 6.3,
+                "width": 4.0,
+                "cupid_bow": 5.4,
+                "proportion": 4.7,
+                "overall": 5.1
+            }
+        },
+        "beard": {
+            "detected": true,
+            "style": "Mustache",
+            "density": "Full",
+            "coverage": "Minimal",
+            "avg_intensity": 145.07,
+            "edge_density": 0.1045,
+            "texture_variation": 58.14,
+            "mustache_score": 43.06,
+            "ratings": {
+                "density": 9.0,
+                "style": 7.0,
+                "overall": 8.0
+            }
+        },
+        "face_shape": {
+            "primary_shape": "Oval",
+            "width_to_length_ratio": 0.8,
+            "jaw_ratio": 1.0,
+            "forehead_ratio": 0.52,
+            "shape_probabilities": {
+                "Round": 14.53,
+                "Oval": 34.91,
+                "Oblong": 15.16,
+                "Square": 12.58,
+                "Heart": 2.91,
+                "Diamond": 19.91
+            },
+            "primary_percentage": 34.91,
+            "recommendations": [
+                "Most frame shapes suit this balanced profile well.",
+                "Use moderate texture in hairstyles to keep proportions natural.",
+                "Experiment with both short and medium beard lengths."
+            ],
+            "characteristics": {
+                "apple_cheeks": "Subtle",
+                "cheekbone": "Balanced",
+                "chin": "Rounded",
+                "temple": "Tapered"
+            },
+            "harmony_score": 5.2
+        }
+    },
+    "symmetry": {
+        "eye_width_score": 99.8,
+        "brow_length_score": 98.2,
+        "jaw_balance_score": 98.63,
+        "symmetry_score": 98.88
+    },
+    "scoring": {
+        "feature_scores": {
+            "eyes": 8.8,
+            "nose": 6.5,
+            "lips": 5.1,
+            "eyebrows": 7.7,
+            "face_shape": 5.2
+        },
+        "golden_ratio_score": 7.1,
+        "overall_rating": 7.0,
+        "percentage": 70.0,
+        "rating_message": "You are above average in attractiveness!"
+    },
+    "images": {
+        "original_filename": "api_20260404_201952_de6ade13.jpg",
+        "highlighted_filename": "api_20260404_201952_de6ade13_highlighted.jpg",
+        "original_url": "/image/api_20260404_201952_de6ade13.jpg",
+        "highlighted_url": "/image/api_20260404_201952_de6ade13_highlighted.jpg"
+    },
+    "expires_at": "2026-04-04T15:49:52.754265Z",
+    "privacy_note": "Images are automatically deleted after 30 minutes."
+}

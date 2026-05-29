@@ -176,6 +176,22 @@ curl -X GET "http://localhost:8000/image/api_20260404_120000_ab12cd34.jpg" \
 curl -X DELETE "http://localhost:8000/image/api_20260404_120000_ab12cd34.jpg"
 ```
 
+## WordPress Plugin Settings
+
+If you use the bundled plugin from `plugin/`, configure it in WordPress under `Settings > Face Shape Analyzer`:
+
+```text
+API endpoint URL: https://api.facesanalyzer.com/analyze
+Authentication type: Custom header
+API key / token: same value as API_KEYS in Coolify
+Custom header name: X-API-Key
+Image field name: file
+Extra form fields (JSON): {}
+Image base URL: https://api.facesanalyzer.com
+```
+
+The plugin sends the uploaded image from WordPress to the API using `multipart/form-data`. The FastAPI upload field must be `file`, not `image`.
+
 ## Privacy And TTL
 
 Stored images are written to `./outputs` inside the `face_api` directory. They expire after `IMAGE_TTL_MINUTES` minutes, which defaults to 30. A background APScheduler job runs every 5 minutes to delete expired files automatically, and the API response includes the exact `expires_at` timestamp plus the privacy note for each successful analysis.
@@ -186,4 +202,4 @@ The age endpoint uses a dedicated OpenCV DNN model rather than ratio-based heuri
 
 ## Security Note
 
-The API uses an origin guard and CORS headers so browser requests are accepted only from `facesanalyzer.com` by default. Server-side clients such as WordPress can authenticate with `X-API-Key` using a value from `API_KEYS`. This is stronger than relying only on `Origin`, because non-browser clients can spoof origin headers.
+The API uses an origin guard and CORS headers so browser requests are accepted only from `facesanalyzer.com` by default. Server-side clients such as WordPress can authenticate with `X-API-Key` or `Authorization: Bearer <key>` using a value from `API_KEYS`. This is stronger than relying only on `Origin`, because non-browser clients can spoof origin headers.
