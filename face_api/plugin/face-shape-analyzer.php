@@ -3,7 +3,7 @@
  * Plugin Name: Face Shape Analyzer
  * Plugin URI: https://example.com/
  * Description: Upload a portrait, send it to an external face analysis API, and display polished visual insights through a shortcode.
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: Codex
  * Text Domain: face-shape-analyzer
  */
@@ -16,7 +16,7 @@ final class FSA_Face_Shape_Analyzer {
 	private const OPTION_NAME = 'fsa_face_shape_analyzer_settings';
 	private const NONCE_ACTION = 'fsa_process_face_analysis';
 	private const AJAX_ACTION = 'fsa_process_face_analysis';
-	private const VERSION = '1.0.2';
+	private const VERSION = '1.0.3';
 	private const SHORTCODE = 'face_shape_analyzer';
 
 	public function __construct() {
@@ -191,9 +191,10 @@ final class FSA_Face_Shape_Analyzer {
 										</svg>
 									</div>
 									<h3 data-fsa-intake-title><?php esc_html_e('Upload Image', 'face-shape-analyzer'); ?></h3>
-									<p data-fsa-intake-description><?php esc_html_e('JPG, PNG, or WEBP • Max 8MB', 'face-shape-analyzer'); ?></p>
+									<p data-fsa-intake-description><?php esc_html_e('JPG, PNG, or WEBP - Max 8MB', 'face-shape-analyzer'); ?></p>
 									<div class="fsa-dropzone__meta">
 										<span><?php esc_html_e('Drag and drop supported', 'face-shape-analyzer'); ?></span>
+										<span><?php esc_html_e('Private 30 min links', 'face-shape-analyzer'); ?></span>
 									</div>
 									<span class="fsa-dropzone__button"><?php esc_html_e('Choose Image', 'face-shape-analyzer'); ?></span>
 								</div>
