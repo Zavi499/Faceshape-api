@@ -27,6 +27,7 @@ API_KEYS = [
     for key in os.getenv("API_KEYS", "").split(",")
     if key.strip()
 ]
+IMAGE_URL_SECRET = os.getenv("IMAGE_URL_SECRET", API_KEYS[0] if API_KEYS else "development-image-url-secret")
 GOLDEN_RATIO = 1.618
 FACE_LANDMARKER_MODEL_URL = (
     "https://storage.googleapis.com/mediapipe-models/face_landmarker/"

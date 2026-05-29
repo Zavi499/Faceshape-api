@@ -25,6 +25,7 @@ from detailed_analysis import (
 )
 from detector import FaceMeshDetector
 from features import analyze_beard, analyze_eyebrows, analyze_eyes, analyze_face_shape, analyze_lips, analyze_nose
+from image_tokens import validate_image_access_token
 from measurements import compute_measurements, to_pixel_landmarks
 from renderer import render_highlighted_mesh
 from response_builder import build_analysis_response
@@ -230,7 +231,19 @@ async def analyze_face(request: Request, file: UploadFile = File(...)) -> Analys
         symmetry = compute_symmetry(prepared.measurements)
         scoring = calculate_scores(prepared.measurements, eyes, eyebrows, nose, lips, face_shape)
 
-        render_highlighted_mesh(prepared.validated_image.bgr_image, prepared.face_landmarks, filenames["base"])
+        rendered_highlighted_filename = render_highlighted_mesh(
+            prepared.validated_image.bgr_image,
+            prepared.face_landmarks,
+            filenames["base"],
+        )
+        if rendered_highlighted_filename != highlighted_filename:
+            highlighted_filename = rendered_highlighted_filename
+        if not (OUTPUT_DIR / highlighted_filename).exists():
+            raise APIError(
+                500,
+                "Highlighted image could not be created.",
+                "The face mesh renderer did not create the expected highlighted image file.",
+            )
         highlighted_created = True
         write_image_metadata(highlighted_filename, now, expires_at)
 
@@ -423,8 +436,15 @@ async def analyze_golden_ratio(request: Request, file: UploadFile = File(...)) -
         500: {"model": APIErrorResponse},
     },
 )
-async def get_image(filename: str) -> StreamingResponse:
+async def get_image(filename: str, expires: str | None = None, token: str | None = None) -> StreamingResponse:
     """Stream a stored original or highlighted image from the output directory."""
+
+    if (expires or token) and not validate_image_access_token(filename, expires, token):
+        raise APIError(
+            404,
+            "Image file not found or already deleted.",
+            "The image link is invalid or has already expired.",
+        )
 
     try:
         image_path = get_image_path(filename)

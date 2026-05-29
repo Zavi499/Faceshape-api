@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from datetime import datetime
 
+from image_tokens import build_signed_image_url
 from measurements import MeasurementResult
 from schemas import (
     AnalysisResponse,
@@ -134,8 +135,8 @@ def build_analysis_response(
         images=ImageReferences(
             original_filename=original_filename,
             highlighted_filename=highlighted_filename,
-            original_url=f"/image/{original_filename}",
-            highlighted_url=f"/image/{highlighted_filename}",
+            original_url=build_signed_image_url(original_filename, expires_at),
+            highlighted_url=build_signed_image_url(highlighted_filename, expires_at),
         ),
         expires_at=expires_at,
         privacy_note="Images are automatically deleted after 30 minutes.",

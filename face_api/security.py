@@ -94,6 +94,14 @@ class OriginGuardMiddleware(BaseHTTPMiddleware):
             )
 
         if (
+            request.method == "GET"
+            and request.url.path.startswith("/image/")
+            and request.query_params.get("expires")
+            and request.query_params.get("token")
+        ):
+            return await call_next(request)
+
+        if (
             request.url.path not in PUBLIC_PATHS
             and not _is_allowed_origin(candidate_origin)
             and not _has_valid_api_key(request)

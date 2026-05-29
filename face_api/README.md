@@ -170,6 +170,8 @@ curl -X GET "http://localhost:8000/image/api_20260404_120000_ab12cd34.jpg" \
   --output downloaded.jpg
 ```
 
+Analysis responses include signed image URLs with `expires` and `token` query parameters. Use those returned URLs directly in frontend image tags so browsers can load the temporary original and highlighted images without custom request headers.
+
 ## DELETE /image/{filename}
 
 ```bash
