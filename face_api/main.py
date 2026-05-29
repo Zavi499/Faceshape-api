@@ -459,7 +459,11 @@ async def get_image(filename: str, expires: str | None = None, token: str | None
         )
 
     media_type = guess_type(image_path.name)[0] or "application/octet-stream"
-    return StreamingResponse(image_path.open("rb"), media_type=media_type)
+    return StreamingResponse(
+        image_path.open("rb"),
+        media_type=media_type,
+        headers={"Cache-Control": "no-store, max-age=0"},
+    )
 
 
 @app.delete(

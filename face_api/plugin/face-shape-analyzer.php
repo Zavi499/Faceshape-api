@@ -3,7 +3,7 @@
  * Plugin Name: Face Shape Analyzer
  * Plugin URI: https://example.com/
  * Description: Upload a portrait, send it to an external face analysis API, and display polished visual insights through a shortcode.
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: Codex
  * Text Domain: face-shape-analyzer
  */
@@ -16,7 +16,7 @@ final class FSA_Face_Shape_Analyzer {
 	private const OPTION_NAME = 'fsa_face_shape_analyzer_settings';
 	private const NONCE_ACTION = 'fsa_process_face_analysis';
 	private const AJAX_ACTION = 'fsa_process_face_analysis';
-	private const VERSION = '1.0.1';
+	private const VERSION = '1.0.2';
 	private const SHORTCODE = 'face_shape_analyzer';
 
 	public function __construct() {
