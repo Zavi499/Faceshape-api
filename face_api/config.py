@@ -22,6 +22,11 @@ ALLOWED_ORIGINS = [
     ).split(",")
     if origin.strip()
 ]
+API_KEYS = [
+    key.strip()
+    for key in os.getenv("API_KEYS", "").split(",")
+    if key.strip()
+]
 GOLDEN_RATIO = 1.618
 FACE_LANDMARKER_MODEL_URL = (
     "https://storage.googleapis.com/mediapipe-models/face_landmarker/"

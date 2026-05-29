@@ -8,7 +8,7 @@ from fastapi import Request
 from fastapi.responses import JSONResponse, Response
 from starlette.middleware.base import BaseHTTPMiddleware
 
-from config import ALLOWED_ORIGINS
+from config import ALLOWED_ORIGINS, API_KEYS
 
 PUBLIC_PATHS = {
     "/docs",
@@ -33,6 +33,15 @@ def _is_allowed_origin(origin: str | None) -> bool:
     """Return whether an origin is explicitly allowed."""
 
     return origin in ALLOWED_ORIGINS
+
+
+def _has_valid_api_key(request: Request) -> bool:
+    """Return whether a request carries one of the configured API keys."""
+
+    if not API_KEYS:
+        return False
+    api_key = request.headers.get("x-api-key", "").strip()
+    return api_key in API_KEYS
 
 
 def _cors_headers(origin: str | None) -> dict[str, str]:
@@ -73,13 +82,17 @@ class OriginGuardMiddleware(BaseHTTPMiddleware):
                 },
             )
 
-        if request.url.path not in PUBLIC_PATHS and not _is_allowed_origin(candidate_origin):
+        if (
+            request.url.path not in PUBLIC_PATHS
+            and not _is_allowed_origin(candidate_origin)
+            and not _has_valid_api_key(request)
+        ):
             return JSONResponse(
                 status_code=403,
                 content={
                     "success": False,
-                    "message": "Origin not allowed.",
-                    "detail": "Requests are only accepted from facesanalyzer.com.",
+                    "message": "Request not allowed.",
+                    "detail": "Requests require an allowed facesanalyzer.com origin or a valid API key.",
                 },
             )
 

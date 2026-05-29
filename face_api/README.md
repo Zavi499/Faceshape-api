@@ -57,7 +57,13 @@ To allow browser requests only from the frontend domain, add this environment va
 ALLOWED_ORIGINS=https://facesanalyzer.com,https://www.facesanalyzer.com
 ```
 
-The API enforces this for `/analyze`, specialized analysis endpoints, and `/image/{filename}`. Requests from other browser origins receive HTTP `403`.
+For WordPress or other server-side integrations, also add an API key. Use a long random value:
+
+```text
+API_KEYS=replace-with-a-long-random-secret
+```
+
+The API enforces this for `/analyze`, specialized analysis endpoints, and `/image/{filename}`. Requests need either an allowed browser origin or a valid `X-API-Key` header.
 
 ### 3. Add Domain
 
@@ -180,4 +186,4 @@ The age endpoint uses a dedicated OpenCV DNN model rather than ratio-based heuri
 
 ## Security Note
 
-The API uses an origin guard and CORS headers so browser requests are accepted only from `facesanalyzer.com` by default. This protects normal website usage, but `Origin` headers can be spoofed by non-browser clients. For private or paid production access, add API-key authentication or user authentication in addition to the origin restriction.
+The API uses an origin guard and CORS headers so browser requests are accepted only from `facesanalyzer.com` by default. Server-side clients such as WordPress can authenticate with `X-API-Key` using a value from `API_KEYS`. This is stronger than relying only on `Origin`, because non-browser clients can spoof origin headers.
