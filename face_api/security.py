@@ -40,8 +40,19 @@ def _has_valid_api_key(request: Request) -> bool:
 
     if not API_KEYS:
         return False
+
     api_key = request.headers.get("x-api-key", "").strip()
-    return api_key in API_KEYS
+    authorization = request.headers.get("authorization", "").strip()
+    bearer_prefix = "bearer "
+    api_key_prefix = "apikey "
+
+    token = ""
+    if authorization.lower().startswith(bearer_prefix):
+        token = authorization[len(bearer_prefix) :].strip()
+    elif authorization.lower().startswith(api_key_prefix):
+        token = authorization[len(api_key_prefix) :].strip()
+
+    return api_key in API_KEYS or token in API_KEYS
 
 
 def _cors_headers(origin: str | None) -> dict[str, str]:
